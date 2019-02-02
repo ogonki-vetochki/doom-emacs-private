@@ -1,1 +1,0 @@
-dists/quicklisp/software/split-sequence-v1.5.0/split-sequence.asd
