@@ -85,6 +85,8 @@
 (add-to-list 'auto-mode-alist '("\\.lass\\'" . sly-mode))
 
 ;; Fira Code ligatures config
+(global-prettify-symbols-mode 1)
+
 (when (window-system)
   (set-frame-font "Fira Code"))
 (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
@@ -116,6 +118,11 @@
   (dolist (char-regexp alist)
     (set-char-table-range composition-function-table (car char-regexp)
                           `([,(cdr char-regexp) 0 font-shape-gstring]))))
+
+;; Golang config
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "GOPATH"))
 
 ;;(def-project-mode! +javascript-screeps-mode
 ;;  :match "/screeps\\(?:-ai\\)?/.+$"
