@@ -17,13 +17,14 @@
  +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
-(require 'doom-themes)
 
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
 ;; Theme config
+(require 'doom-themes)
+
 (load-theme 'doom-dracula t)
 (doom-themes-visual-bell-config)
 (doom-themes-treemacs-config)
@@ -70,12 +71,10 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
-
 ;; Scheme
 (setq scheme-program-name "/usr/local/bin/scheme")
 (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scheme-repl-mode-hook 'rainbow-delimiters-mode)
-
 
 ;; Sly config
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
