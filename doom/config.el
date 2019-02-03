@@ -13,10 +13,21 @@
  doom-variable-pitch-font (font-spec :family "Fira Code" :size 12)
  doom-unicode-font (font-spec :family "Fira Code" :size 12)
  doom-big-font (font-spec :family "Fira Code" :size 19)
-
  +workspaces-switch-project-function #'ignore
  +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
+
+(require 'doom-themes)
+
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; Theme config
+(load-theme 'doom-dracula t)
+(doom-themes-visual-bell-config)
+(doom-themes-treemacs-config)
+(doom-themes-org-config)
 
 ;;
 ;; Host-specific config
