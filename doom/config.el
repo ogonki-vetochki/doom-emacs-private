@@ -9,12 +9,13 @@
  user-full-name    "Nikita Shatov"
  user-mail-address "xamenrax@gmail.com"
 
- doom-variable-pitch-font (font-spec :family "FuraCode Nerd Font" :size 12)
- doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
- doom-big-font (font-spec :family "FuraCode Nerd Font" :size 19)
+ doom-font (font-spec :family "Fira Code" :size 12)
+ doom-variable-pitch-font (font-spec :family "Fira Code" :size 12)
+ doom-unicode-font (font-spec :family "Fira Code" :size 12)
+ doom-big-font (font-spec :family "Fira Code" :size 19)
 
  +workspaces-switch-project-function #'ignore
- +pretty-code-enabled-modes '(emacs-lisp-mode org-mode)
+ +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
 ;;
@@ -22,8 +23,7 @@
 
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
-  (add-to-list
-'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 
@@ -48,21 +48,63 @@
 ;;
 ;; Custom
 
-;; Just kill the buffer I'm looking at
+;; requires
+(require 'rainbow-delimiters)
+(require 'sly-autoloads)
 
+;; custom keybeindings
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+
+;; Scheme
+(setq scheme-program-name "/usr/local/bin/scheme")
+(add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scheme-repl-mode-hook 'rainbow-delimiters-mode)
+
+
 ;; Sly config
-
-(require 'sly-autoloads)
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
-
-(require 'rainbow-delimiters)
-
 (add-hook 'sly-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'sly-mode-hook 'rainbow-delimiters-mode)
 
 (add-to-list 'auto-mode-alist '("\\.lass\\'" . sly-mode))
+
+;; Fira Code ligatures config
+(when (window-system)
+  (set-frame-font "Fira Code"))
+(let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
+               (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
+               (36 . ".\\(?:>\\)")
+               (37 . ".\\(?:\\(?:%%\\)\\|%\\)")
+               (38 . ".\\(?:\\(?:&&\\)\\|&\\)")
+               (42 . ".\\(?:\\(?:\\*\\*/\\)\\|\\(?:\\*[*/]\\)\\|[*/>]\\)")
+               (43 . ".\\(?:\\(?:\\+\\+\\)\\|[+>]\\)")
+               (45 . ".\\(?:\\(?:-[>-]\\|<<\\|>>\\)\\|[<>}~-]\\)")
+               (46 . ".\\(?:\\(?:\\.[.<]\\)\\|[.=-]\\)")
+               (47 . ".\\(?:\\(?:\\*\\*\\|//\\|==\\)\\|[*/=>]\\)")
+               (48 . ".\\(?:x[a-zA-Z]\\)")
+               (58 . ".\\(?:::\\|[:=]\\)")
+               (59 . ".\\(?:;;\\|;\\)")
+               (60 . ".\\(?:\\(?:!--\\)\\|\\(?:~~\\|->\\|\\$>\\|\\*>\\|\\+>\\|--\\|<[<=-]\\|=[<=>]\\||>\\)\\|[*$+~/<=>|-]\\)")
+               (61 . ".\\(?:\\(?:/=\\|:=\\|<<\\|=[=>]\\|>>\\)\\|[<=>~]\\)")
+               (62 . ".\\(?:\\(?:=>\\|>[=>-]\\)\\|[=>-]\\)")
+               (63 . ".\\(?:\\(\\?\\?\\)\\|[:=?]\\)")
+               (91 . ".\\(?:]\\)")
+               (92 . ".\\(?:\\(?:\\\\\\\\\\)\\|\\\\\\)")
+               (94 . ".\\(?:=\\)")
+               (119 . ".\\(?:ww\\)")
+               (123 . ".\\(?:-\\)")
+               (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               )
+             ))
+  (dolist (char-regexp alist)
+    (set-char-table-range composition-function-table (car char-regexp)
+                          `([,(cdr char-regexp) 0 font-shape-gstring]))))
 
 ;;(def-project-mode! +javascript-screeps-mode
 ;;  :match "/screeps\\(?:-ai\\)?/.+$"
