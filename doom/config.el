@@ -18,17 +18,31 @@
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
 
-;; Global settings (defaults)
-(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-;; Theme config
+;; doom-themes config
 (require 'doom-themes)
 
 (load-theme 'doom-dracula t)
 (doom-themes-visual-bell-config)
 (doom-themes-treemacs-config)
 (doom-themes-org-config)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; doom-modeline config
+(require 'doom-modeline)
+
+(doom-modeline-mode 1)
+(setq doom-modeline-height 25)
+(setq doom-modeline-bar-width 3)
+(setq doom-modeline-icon t)
+(setq doom-modeline-major-mode-icon t)
+(setq doom-modeline-major-mode-color-icon t)
+(setq doom-modeline-minor-modes nil)
+(setq doom-modeline-persp-name t)
+(setq doom-modeline-lsp t)
+(setq doom-modeline-github t)
+(setq doom-modeline-github-interval (* 30 60))
+(setq doom-modeline-version t)
 
 ;;
 ;; Host-specific config
