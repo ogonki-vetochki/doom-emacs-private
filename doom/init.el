@@ -42,6 +42,7 @@
 
        :editor
        ;;(format +onsave)  ; automated prettiness
+       fold                ; (nigh) universal code folding
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors    ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
@@ -63,6 +64,7 @@
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       flycheck            ; tasing you for every semicolon you forget
        ;;gist              ; interacting with github gists
        ;;macos             ; MacOS-specific commands
        ;;make              ; run make tasks from Emacs
