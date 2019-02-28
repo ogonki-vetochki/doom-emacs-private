@@ -9,8 +9,6 @@
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
        snippets          ; my elves. They type so I don't have to
-       spellcheck        ; tasing you for misspelling mispelling
-       syntax-checker    ; tasing you for every semicolon you forget
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
@@ -54,10 +52,8 @@
        ;;+ranger         ; bringing the goodness of ranger to dired
        ;;+icons          ; colorful icons for dired-mode
         )
-       ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
-       hideshow          ; basic code-folding support
        imenu             ; an imenu sidebar and searchable code index
        ;;term            ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
