@@ -76,7 +76,6 @@
 
 ;; requires
 (require 'rainbow-delimiters)
-(require 'sly-autoloads)
 
 ;; custom keybeindings
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
@@ -90,18 +89,13 @@
 (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scheme-repl-mode-hook 'rainbow-delimiters-mode)
 
-;; Sly config
+;; Set your lisp system and, optionally, some contribs
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
-(add-hook 'sly-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'sly-mode-hook 'rainbow-delimiters-mode)
-
-(add-to-list 'auto-mode-alist '("\\.lass\\'" . sly-mode))
+(setq slime-contribs '(slime-fancy))
 
 ;; Fira Code ligatures config
 (global-prettify-symbols-mode 1)
 
-(when (window-system)
-  (set-frame-font "Fira Code"))
 (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
                (36 . ".\\(?:>\\)")
@@ -125,7 +119,7 @@
                (119 . ".\\(?:ww\\)")
                (123 . ".\\(?:-\\)")
                (124 . ".\\(?:\\(?:|[=|]\\)\\|[=>|]\\)")
-              (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
+               (126 . ".\\(?:~>\\|~~\\|[>=@~-]\\)")
                )
             ))
   (dolist (char-regexp alist)
