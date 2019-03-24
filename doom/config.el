@@ -14,9 +14,8 @@
  doom-unicode-font (font-spec :family "Fira Code" :size 12)
  doom-big-font (font-spec :family "Fira Code" :size 19)
  +workspaces-switch-project-function #'ignore
- +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode)
+ +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode slime-repl-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
-
 
 ;; doom-themes config
 (require 'doom-themes)
@@ -92,6 +91,9 @@
 ;; Set your lisp system and, optionally, some contribs
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
+(add-hook 'lisp-mode-hook 'slime-lisp-mode-hook)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'slime-repl-mode-hook 'rainbow-delimiters-mode)
 
 ;; Fira Code ligatures config
 (global-prettify-symbols-mode 1)
