@@ -9,3 +9,4 @@
 
 ;; doom-modeline extracted
 (package! doom-modeline :recipe(:fetcher github :repo "seagle0128/doom-modeline"))
+(package! evil-smartparens)

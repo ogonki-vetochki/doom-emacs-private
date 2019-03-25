@@ -14,7 +14,7 @@
  doom-unicode-font (font-spec :family "Fira Code" :size 12)
  doom-big-font (font-spec :family "Fira Code" :size 19)
  +workspaces-switch-project-function #'ignore
- +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode slime-repl-mode)
+ +pretty-code-enabled-modes '(scheme-repl-mode emacs-lisp-mode org-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
 ;; doom-themes config
@@ -41,7 +41,7 @@
 (setq doom-modeline-lsp t)
 (setq doom-modeline-github t)
 (setq doom-modeline-github-interval (* 30 60))
-(setq doom-modeline-version t)
+(setq doom-modeline-env-version t)
 
 ;;
 ;; Host-specific config
@@ -87,6 +87,7 @@
 (setq scheme-program-name "/usr/local/bin/scheme")
 (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scheme-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'inferior-scheme-mode-hook 'rainbow-delimiters-mode)
 
 ;; SLY (sbcl)
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -94,9 +95,22 @@
 (add-hook 'sly-mrepl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'sly-editing-mode-hook 'rainbow-delimiters-mode)
 
+;;Clojure (cider)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'cider-repl-mode-hook 'evil-smartparens-mode)
 
 ;; Golang config
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "GOPATH"))
 
+;; Fira code
+(load! "fira-code")
+(provide 'fira-code-mode)
+(add-hook 'prog-mode-hook 'fira-code-mode--enable)
+(add-hook 'sly-mrepl-mode-hook 'fira-code-mode--enable)
+(add-hook 'sly-editing-mode-hook 'fira-code-mode--enable)
+(add-hook 'scheme-mode-hook 'fira-code-mode--enable)
+(add-hook 'scheme-repl-mode-hook 'fira-code-mode--enable)
+(add-hook 'inferior-scheme-mode-hook 'fira-code-mode--enable)
+(add-hook 'cider-repl-mode-hook 'fira-code-mode--enable)
