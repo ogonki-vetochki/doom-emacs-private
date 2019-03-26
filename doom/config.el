@@ -89,13 +89,17 @@
 (add-hook 'scheme-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'inferior-scheme-mode-hook 'rainbow-delimiters-mode)
 
-;; SLY (sbcl)
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+;; LISP
+(setq sly-lisp-implementations
+      '((sbcl ("/usr/local/bin/sbcl"))
+        (clisp ("/usr/local/bin/clisp"))))
+;;(setq inferior-lisp-program "/usr/local/bin/sbcl")
 (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'sly-mrepl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'sly-editing-mode-hook 'rainbow-delimiters-mode)
 
 ;;Clojure (cider)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-repl-mode-hook 'evil-smartparens-mode)
 
